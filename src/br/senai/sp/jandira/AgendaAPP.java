@@ -1,5 +1,6 @@
 package br.senai.sp.jandira;
 
+import br.senai.sp.jandira.gui.EspecialidadesPanel;
 import br.senai.sp.jandira.gui.FrameHome;
 
 
