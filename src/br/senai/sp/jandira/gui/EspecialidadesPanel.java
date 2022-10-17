@@ -1,17 +1,24 @@
 package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
+import br.senai.sp.jandira.model.Especialidade;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-
 public class EspecialidadesPanel extends javax.swing.JPanel {
+
+    private int linha;
 
     public EspecialidadesPanel() {
         initComponents();
         EspecialidadeDAO.criarlistaDeEspecialidades();
         preencherTabela();
+    }
+
+    private int getLinha() {
+        linha = tableEspecialidades.getSelectedRow();
+        return linha;
     }
 
     @SuppressWarnings("unchecked")
@@ -81,10 +88,9 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonEspecialidadesExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEspecialidadesExcluirActionPerformed
-        int linha = tableEspecialidades.getSelectedRow();
-        
-        if (linha != -1) {
-            excluirEspecialidade(linha);
+
+        if (getLinha() != -1) {
+            excluirEspecialidade();
         } else {
             JOptionPane.showMessageDialog(
                     this,
@@ -92,26 +98,51 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
                     "Atenção",
                     JOptionPane.WARNING_MESSAGE);
         }
-       
+
     }//GEN-LAST:event_ButtonEspecialidadesExcluirActionPerformed
-    
-    private void excluirEspecialidade(int linha) {
-        String codigoStr = tableEspecialidades.getValueAt(linha, 0).toString();
-        Integer codigo = Integer.valueOf(codigoStr);
+
+    private void editarEspecialidade() {
+        Especialidade especialidade = EspecialidadeDAO.getEspecialidades(getCodigo());
         
+        EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true, especialidade); //READ
+        
+        especialidadeDialog.setVisible(true);
+        
+        preencherTabela();
+    }
+    
+    private void excluirEspecialidade() {
         int resposta = JOptionPane.showConfirmDialog(
                 this,
                 "Você confirma a exclusão?",
                 "Confirmação de exclusão",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-        
-        EspecialidadeDAO.excluir(codigo);
-        preencherTabela();
+
+        if (resposta == 0) {
+            EspecialidadeDAO.excluir(getCodigo());
+            preencherTabela();
+        }
     }
     
+    private Integer getCodigo() {
+        String codigoStr = tableEspecialidades.getValueAt(getLinha(), 0).toString();
+        Integer codigo = Integer.valueOf(codigoStr);
+        return codigo;
+    }
+
     private void ButtonEspecialidadesEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEspecialidadesEditarActionPerformed
-        // TODO add your handling code here:
+
+        if (getLinha() != -1) {
+            editarEspecialidade();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, selecione a especialidade que você deseja editar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_ButtonEspecialidadesEditarActionPerformed
 
     private void ButtonEspecialidadesAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEspecialidadesAdicionarActionPerformed
@@ -134,20 +165,20 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
         ajustarTabela();
 
     }
-    
+
     private void ajustarTabela() {
-        
+
         //impedir que o usuario movimente as colunas
         tableEspecialidades.getTableHeader().setReorderingAllowed(false);
-        
+
         //Bloquear a edição das celulas
         tableEspecialidades.setDefaultEditor(Object.class, null);
-        
+
         //definir a largura das colunas
         tableEspecialidades.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tableEspecialidades.getColumnModel().getColumn(0).setPreferredWidth(200);
         tableEspecialidades.getColumnModel().getColumn(1).setPreferredWidth(300);
         tableEspecialidades.getColumnModel().getColumn(2).setPreferredWidth(517);
-        
+
     }
 }
