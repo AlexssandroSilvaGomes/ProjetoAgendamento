@@ -103,14 +103,14 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
 
     private void editarEspecialidade() {
         Especialidade especialidade = EspecialidadeDAO.getEspecialidades(getCodigo());
-        
+
         EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true, especialidade); //READ
-        
+
         especialidadeDialog.setVisible(true);
-        
+
         preencherTabela();
     }
-    
+
     private void excluirEspecialidade() {
         int resposta = JOptionPane.showConfirmDialog(
                 this,
@@ -124,7 +124,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
             preencherTabela();
         }
     }
-    
+
     private Integer getCodigo() {
         String codigoStr = tableEspecialidades.getValueAt(getLinha(), 0).toString();
         Integer codigo = Integer.valueOf(codigoStr);
@@ -142,7 +142,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
                     "Atenção",
                     JOptionPane.WARNING_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_ButtonEspecialidadesEditarActionPerformed
 
     private void ButtonEspecialidadesAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEspecialidadesAdicionarActionPerformed

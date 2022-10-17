@@ -27,7 +27,8 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     }
 
     private void preecherFormulario() {
-
+        labelTitulo.setText("   Especialidades - EDITAR");
+        labelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/image/edit.png")));
         textFieldCodigo.setText(especialidade.getCodigo().toString());
         textFieldNomeEspecialidade.setText(especialidade.getNome());
         textFieldDescricaoEspecialidade.setText(especialidade.getDescriçao());
@@ -39,7 +40,7 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         panelHeader = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         panelMain = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         labelCodigo = new javax.swing.JLabel();
@@ -58,12 +59,12 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
         panelHeader.setBackground(new java.awt.Color(51, 51, 51));
         panelHeader.setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/image/plus64px.png"))); // NOI18N
-        jLabel2.setText("   Especialidades - ADICIONAR");
-        panelHeader.add(jLabel2);
-        jLabel2.setBounds(100, 20, 480, 70);
+        labelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/image/plus64px.png"))); // NOI18N
+        labelTitulo.setText("   Especialidades - ADICIONAR");
+        panelHeader.add(labelTitulo);
+        labelTitulo.setBounds(100, 20, 480, 70);
 
         getContentPane().add(panelHeader);
         panelHeader.setBounds(0, 0, 700, 100);
@@ -187,11 +188,11 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEspecialidadesCancelar;
     private javax.swing.JButton buttonEspecialidadesSalvar;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelDescricaoEspecialidade;
     private javax.swing.JLabel labelNomeEspecialidade;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelMain;
     private javax.swing.JTextField textFieldCodigo;
