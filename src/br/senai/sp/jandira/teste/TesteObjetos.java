@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import br.senai.sp.jandira.AgendaAPP;
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
-import br.senai.sp.jandira.model.PlanoDeSaúde;
+import br.senai.sp.jandira.model.PlanoDeSaude;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TesteObjetos {
 
     public static void main(String[] args) {
-
+        
         int[] a = {6, 9, 87, 35, 96};
         int[] b = new int[4];
         b[0] = 55;
@@ -42,8 +44,7 @@ public class TesteObjetos {
                 {6, 2, 1, 4},
                 {6, 444, 5, 1}
             }, {
-                {},
-            }
+                {},}
         };
 
         System.out.println(quitanda[1][4]);
@@ -118,28 +119,28 @@ public class TesteObjetos {
         // e exibir o nome da operadora de cada um deles
         // usando for each
         System.out.println("-------------------Planos De Saúde----------------");
+//
+//        PlanoDeSaude p1 = new PlanoDeSaude("Amil Médicas");
+//
+//        PlanoDeSaude p2 = new PlanoDeSaude("Bradesco Intermédicas");
+//
+//        PlanoDeSaude p3 = new PlanoDeSaude("NotreDame");
 
-        PlanoDeSaúde p1 = new PlanoDeSaúde("Amil Médicas");
-
-        PlanoDeSaúde p2 = new PlanoDeSaúde("Bradesco Intermédicas");
-
-        PlanoDeSaúde p3 = new PlanoDeSaúde("NotreDame");
-
-        ArrayList<PlanoDeSaúde> planos = new ArrayList<>();
-        planos.add(p1);
-        planos.add(p2);
-        planos.add(p3);
-
-        for (PlanoDeSaúde p : planos) {
-            System.out.println(p.getOperadora());
-            System.out.println(p.getQuantidade());
-        }
-
-        System.out.println("--------" + PlanoDeSaúde.getQuantidade());
-
-        AgendaAPP.main(args);
-
-        System.out.println("--------" + PlanoDeSaúde.getQuantidade());
+//        ArrayList<PlanoDeSaude> planos = new ArrayList<>();
+//        planos.add(p1);
+//        planos.add(p2);
+//        planos.add(p3);
+        
+//        for (PlanoDeSaude p : planos) {
+//            System.out.println(p.getOperadora());
+//            System.out.println(p.getQuantidade());
+//        }
+//
+//        System.out.println("--------" + PlanoDeSaude.getQuantidade());
+//
+//        AgendaAPP.main(args);
+//
+//        System.out.println("--------" + PlanoDeSaude.getQuantidade());
 
     }
 

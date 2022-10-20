@@ -2,37 +2,62 @@ package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 
 public class EspecialidadesDialog extends javax.swing.JDialog {
 
-    Especialidade especialidade;
+    private Especialidade especialidade;
+    private OperacaoEnum operacao;
 
     public EspecialidadesDialog(java.awt.Frame parent,
-            boolean modal) {
+            boolean modal,
+            OperacaoEnum operacao) {
+
         super(parent, modal);
         initComponents();
+
+        this.operacao = operacao;
+
+        preencherTitulo();
     }
 
     public EspecialidadesDialog(java.awt.Frame parent,
             boolean modal,
-            Especialidade e) {
+            Especialidade e,
+            OperacaoEnum operacao) {
 
         super(parent, modal);
         initComponents();
 
         especialidade = e;
 
+        this.operacao = operacao;
+
         preecherFormulario();
+
+        preencherTitulo();
     }
 
     private void preecherFormulario() {
-        labelTitulo.setText("   Especialidades - EDITAR");
-        labelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/image/edit.png")));
+
         textFieldCodigo.setText(especialidade.getCodigo().toString());
         textFieldNomeEspecialidade.setText(especialidade.getNome());
         textFieldDescricaoEspecialidade.setText(especialidade.getDescriçao());
 
+    }
+
+    private void preencherTitulo() {
+        labelTitulo.setText("   Especialidades - " + operacao);
+        if (operacao == OperacaoEnum.EDITAR) {
+
+            labelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/image/edit.png")));
+
+        } else {
+
+            labelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/image/plus64px.png")));
+
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -163,12 +188,20 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textFieldDescricaoEspecialidadeActionPerformed
 
     private void buttonEspecialidadesCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesCancelarActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_buttonEspecialidadesCancelarActionPerformed
 
     private void buttonEspecialidadesSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesSalvarActionPerformed
+        if (operacao == OperacaoEnum.ADICIONAR) {
+            adicionar();
+        } else {
+            editar();
+        }
 
-        //cruar um objeto especialidade
+    }//GEN-LAST:event_buttonEspecialidadesSalvarActionPerformed
+
+    private void adicionar() {
+        //Criar um objeto especialidade
         Especialidade novaEspecialidade = new Especialidade();
         novaEspecialidade.setNome(textFieldNomeEspecialidade.getText());
         novaEspecialidade.setDescricao(textFieldDescricaoEspecialidade.getText());
@@ -183,7 +216,22 @@ public class EspecialidadesDialog extends javax.swing.JDialog {
                 JOptionPane.INFORMATION_MESSAGE);
 
         dispose();
-    }//GEN-LAST:event_buttonEspecialidadesSalvarActionPerformed
+    }
+
+    private void editar() {
+        especialidade.setNome(textFieldNomeEspecialidade.getText());
+        especialidade.setDescricao(textFieldDescricaoEspecialidade.getText());
+        
+        EspecialidadeDAO.atualizar(especialidade);
+        
+        JOptionPane.showMessageDialog(
+                this,
+                "Especialidade editada com sucesso!",
+                "Especialidade",
+                JOptionPane.INFORMATION_MESSAGE);
+        
+        dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEspecialidadesCancelar;

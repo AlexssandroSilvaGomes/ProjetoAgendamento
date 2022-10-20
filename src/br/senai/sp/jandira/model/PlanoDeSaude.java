@@ -2,23 +2,34 @@ package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
 
-public class PlanoDeSaúde {
+public class PlanoDeSaude {
 	
 	private String operadora;
 	private String categoria;
 	private String numero;
 	private LocalDate validade;
-	private static int quantidade;
+	private Integer codigo;
+        private static int contador = 99;
 	
-	public PlanoDeSaúde(){
-		this.quantidade++;
+        //construtores da classe
+	public PlanoDeSaude(){
+            gerarCodigo();
 	}
 	
-	public PlanoDeSaúde(String operadora) {
+	public PlanoDeSaude(String operadora, String categoria, String numero, LocalDate validade) {
 		this.operadora = operadora;
-		this.quantidade++;
+                this.categoria = categoria;
+                this.numero = numero;
+                this.validade = validade;
+		gerarCodigo();
 	}
 	
+        private void gerarCodigo() {
+            this.contador++;
+            this.codigo = contador;
+        }
+        
+        //métodos de acesso aos atributos
 	public void setOperadora(String operadora) {
 		this.operadora = operadora;
 	}
@@ -48,8 +59,8 @@ public class PlanoDeSaúde {
 		return validade;
 	}
 	
-	public static int getQuantidade() {
-		return quantidade;
+	public Integer getCodigo() {
+		return codigo;
 	}
 	
 }

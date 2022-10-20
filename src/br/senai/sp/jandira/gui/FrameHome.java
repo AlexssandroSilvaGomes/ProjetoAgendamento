@@ -10,6 +10,8 @@ public class FrameHome extends javax.swing.JFrame {
     private final int ALTURA = 380;
 
     private EspecialidadesPanel especialidadesPanel;
+    private PlanoDeSaudePanel planoDeSaudePanel;
+    
 
     public FrameHome() {
         initComponents();
@@ -207,7 +209,9 @@ public class FrameHome extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPacienteActionPerformed
 
     private void buttonPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaudeActionPerformed
-        // TODO add your handling code here:
+        panelHome.setVisible(false);
+        planoDeSaudePanel.setVisible(true);
+        especialidadesPanel.setVisible(false);
     }//GEN-LAST:event_buttonPlanoDeSaudeActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
@@ -222,6 +226,7 @@ public class FrameHome extends javax.swing.JFrame {
         buttonEspecialidade.setBackground(new java.awt.Color(204, 255, 204));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
+        planoDeSaudePanel.setVisible(false);
         especialidadesPanel.setVisible(true);
     }//GEN-LAST:event_buttonEspecialidadeActionPerformed
 
@@ -229,6 +234,7 @@ public class FrameHome extends javax.swing.JFrame {
         buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
         buttonHome.setBackground(new java.awt.Color(204, 255, 204));
         panelHome.setVisible(true);
+        planoDeSaudePanel.setVisible(false);
         especialidadesPanel.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
@@ -254,11 +260,17 @@ public class FrameHome extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initPanels() {
-
+        //cria a tela especialidades
         especialidadesPanel = new EspecialidadesPanel();
         especialidadesPanel.setBounds(POS_X, POS_Y, LARGURA, ALTURA);
         panelMain.add(especialidadesPanel);
         especialidadesPanel.setVisible(false);
+        
+        //cria a tela plano de saude
+        planoDeSaudePanel = new PlanoDeSaudePanel();
+        planoDeSaudePanel.setBounds(POS_X, POS_Y, LARGURA, ALTURA);
+        panelMain.add(planoDeSaudePanel);
+        planoDeSaudePanel.setVisible(false);
 
     }
 

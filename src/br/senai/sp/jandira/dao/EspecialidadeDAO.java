@@ -21,7 +21,8 @@ public class EspecialidadeDAO {
         
         return null;
     }
-
+    
+    //CRUD
     public static void gravar(Especialidade e){
         especialidades.add(e);
     }

@@ -2,9 +2,9 @@ package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadesPanel extends javax.swing.JPanel {
 
@@ -95,7 +95,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(
                     this,
                     "Por favor, selecione a especialidade que você deseja excluir!",
-                    "Atenção",
+                    "Atenção!",
                     JOptionPane.WARNING_MESSAGE);
         }
 
@@ -104,7 +104,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
     private void editarEspecialidade() {
         Especialidade especialidade = EspecialidadeDAO.getEspecialidades(getCodigo());
 
-        EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true, especialidade); //READ
+        EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true, especialidade, OperacaoEnum.EDITAR); //READ
 
         especialidadeDialog.setVisible(true);
 
@@ -146,7 +146,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ButtonEspecialidadesEditarActionPerformed
 
     private void ButtonEspecialidadesAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEspecialidadesAdicionarActionPerformed
-        EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true);
+        EspecialidadesDialog especialidadesDialog = new EspecialidadesDialog(null, true, OperacaoEnum.ADICIONAR);
         especialidadesDialog.setVisible(true);
         preencherTabela();
     }//GEN-LAST:event_ButtonEspecialidadesAdicionarActionPerformed
