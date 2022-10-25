@@ -6,6 +6,7 @@ import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 public class PlanosDeSaudeDialog extends javax.swing.JDialog {
 
@@ -84,8 +85,8 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         buttonEspecialidadesSalvar = new javax.swing.JButton();
         labelNomeCategoria = new javax.swing.JLabel();
         textFieldNomeCategoria = new javax.swing.JTextField();
-        textFieldValidadePlano = new javax.swing.JTextField();
         labelValidadePlano = new javax.swing.JLabel();
+        textFieldValidadePlano = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 460));
@@ -188,18 +189,23 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         jPanel1.add(textFieldNomeCategoria);
         textFieldNomeCategoria.setBounds(20, 160, 430, 30);
 
+        labelValidadePlano.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelValidadePlano.setText("Validade:");
+        jPanel1.add(labelValidadePlano);
+        labelValidadePlano.setBounds(20, 260, 190, 20);
+
         textFieldValidadePlano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldValidadePlanoActionPerformed(evt);
             }
         });
         jPanel1.add(textFieldValidadePlano);
-        textFieldValidadePlano.setBounds(20, 280, 130, 30);
-
-        labelValidadePlano.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelValidadePlano.setText("Validade:");
-        jPanel1.add(labelValidadePlano);
-        labelValidadePlano.setBounds(20, 260, 190, 20);
+        textFieldValidadePlano.setBounds(20, 280, 70, 30);
+        try {
+            textFieldValidadePlano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         panelMain.add(jPanel1);
         jPanel1.setBounds(10, 10, 680, 340);
@@ -276,7 +282,8 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textFieldNomeCategoriaActionPerformed
 
     private void textFieldValidadePlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldValidadePlanoActionPerformed
-        // TODO add your handling code here:
+    
+    
     }//GEN-LAST:event_textFieldValidadePlanoActionPerformed
 
 
@@ -296,6 +303,6 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textFieldNomeCategoria;
     private javax.swing.JTextField textFieldNomeOperadora;
     private javax.swing.JTextField textFieldNumeroPlano;
-    private javax.swing.JTextField textFieldValidadePlano;
+    private javax.swing.JFormattedTextField textFieldValidadePlano;
     // End of variables declaration//GEN-END:variables
 }
