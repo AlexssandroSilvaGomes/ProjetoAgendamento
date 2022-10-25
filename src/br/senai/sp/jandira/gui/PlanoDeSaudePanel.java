@@ -1,6 +1,8 @@
 package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.OperacaoEnum;
+import br.senai.sp.jandira.model.PlanoDeSaude;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -99,6 +101,16 @@ public class PlanoDeSaudePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ButtonPlanoDeSaudeExcluirActionPerformed
     
+    private void editarPlanoDeSaude() {
+        PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
+        
+        PlanosDeSaudeDialog planoDeSaudeDialog = new PlanosDeSaudeDialog(null, true, OperacaoEnum.EDITAR, planoDeSaude);
+        
+        planoDeSaudeDialog.setVisible(true);
+        
+        preencherTabela();
+    }
+    
     private void excluirPlanoDeSaude() {
         int resposta = JOptionPane.showConfirmDialog(this,
                 "Você confirma a exclusão?",
@@ -119,11 +131,23 @@ public class PlanoDeSaudePanel extends javax.swing.JPanel {
     }
     
     private void ButtonPlanoDeSaudeEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPlanoDeSaudeEditarActionPerformed
-
+        
+        if (getLinha() != -1) {
+            editarPlanoDeSaude();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, selecione o plano que você deseja editar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_ButtonPlanoDeSaudeEditarActionPerformed
 
     private void ButtonPlanoDeSaudeAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPlanoDeSaudeAdicionarActionPerformed
-
+        PlanosDeSaudeDialog planosDeSaudeDialog = new PlanosDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
+        planosDeSaudeDialog.setVisible(true);
+        preencherTabela();
     }//GEN-LAST:event_ButtonPlanoDeSaudeAdicionarActionPerformed
 
 
