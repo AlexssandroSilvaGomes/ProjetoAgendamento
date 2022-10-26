@@ -194,6 +194,12 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         jPanel1.add(labelValidadePlano);
         labelValidadePlano.setBounds(20, 260, 190, 20);
 
+        textFieldValidadePlano.setColumns(8);
+        try {
+            textFieldValidadePlano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         textFieldValidadePlano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldValidadePlanoActionPerformed(evt);
@@ -201,11 +207,6 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         });
         jPanel1.add(textFieldValidadePlano);
         textFieldValidadePlano.setBounds(20, 280, 70, 30);
-        try {
-            textFieldValidadePlano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         panelMain.add(jPanel1);
         jPanel1.setBounds(10, 10, 680, 340);
@@ -234,10 +235,19 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonEspecialidadesCancelarActionPerformed
 
     private void buttonEspecialidadesSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesSalvarActionPerformed
-        if (operacao == OperacaoEnum.ADICIONAR) {
+       CharSequence cha = " ";
+        if (textFieldNomeCategoria.getText().isEmpty() || textFieldNomeOperadora.getText().isEmpty() || textFieldNumeroPlano.getText().isEmpty() || textFieldValidadePlano.getText().contains(cha) == true) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Todos os campos precisam estar preenchidos!",
+                "Atenção!",
+                JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (operacao == OperacaoEnum.ADICIONAR) {
             adicionar();
         } else {
             editar();
+        }
         }
     }//GEN-LAST:event_buttonEspecialidadesSalvarActionPerformed
     private void adicionar() {
@@ -258,6 +268,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
                 JOptionPane.INFORMATION_MESSAGE);
 
         dispose();
+
     }
 
     private void editar() {
@@ -282,8 +293,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textFieldNomeCategoriaActionPerformed
 
     private void textFieldValidadePlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldValidadePlanoActionPerformed
-    
-    
+
     }//GEN-LAST:event_textFieldValidadePlanoActionPerformed
 
 
