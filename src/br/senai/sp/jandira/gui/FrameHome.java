@@ -11,6 +11,7 @@ public class FrameHome extends javax.swing.JFrame {
 
     private EspecialidadesPanel especialidadesPanel;
     private PlanoDeSaudePanel planoDeSaudePanel;
+    private PacientePanel pacientePanel;
     
 
     public FrameHome() {
@@ -205,16 +206,25 @@ public class FrameHome extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAgendaActionPerformed
 
     private void buttonPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPacienteActionPerformed
-        // TODO add your handling code here:
+        buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
+        buttonPlanoDeSaude.setBackground(new java.awt.Color(246, 246, 246));
+        buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonPaciente.setBackground(new java.awt.Color(204, 255, 204));
+        panelHome.setVisible(false);
+        planoDeSaudePanel.setVisible(false);
+        especialidadesPanel.setVisible(false);
+        pacientePanel.setVisible(true);
     }//GEN-LAST:event_buttonPacienteActionPerformed
 
     private void buttonPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaudeActionPerformed
         buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
         buttonPlanoDeSaude.setBackground(new java.awt.Color(204, 255, 204));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonPaciente.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
         planoDeSaudePanel.setVisible(true);
         especialidadesPanel.setVisible(false);
+        pacientePanel.setVisible(false);
     }//GEN-LAST:event_buttonPlanoDeSaudeActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
@@ -229,18 +239,22 @@ public class FrameHome extends javax.swing.JFrame {
         buttonEspecialidade.setBackground(new java.awt.Color(204, 255, 204));
         buttonPlanoDeSaude.setBackground(new java.awt.Color(246, 246, 246));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonPaciente.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
         planoDeSaudePanel.setVisible(false);
         especialidadesPanel.setVisible(true);
+        pacientePanel.setVisible(false);
     }//GEN-LAST:event_buttonEspecialidadeActionPerformed
 
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
         buttonEspecialidade.setBackground(new java.awt.Color(246, 246, 246));
         buttonPlanoDeSaude.setBackground(new java.awt.Color(246, 246, 246));
         buttonHome.setBackground(new java.awt.Color(204, 255, 204));
+        buttonPaciente.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(true);
         planoDeSaudePanel.setVisible(false);
         especialidadesPanel.setVisible(false);
+        pacientePanel.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -271,12 +285,17 @@ public class FrameHome extends javax.swing.JFrame {
         panelMain.add(especialidadesPanel);
         especialidadesPanel.setVisible(false);
         
-        //cria a tela plano de saude
+        //cria a tela planos de saude
         planoDeSaudePanel = new PlanoDeSaudePanel();
         planoDeSaudePanel.setBounds(POS_X, POS_Y, LARGURA, ALTURA);
         panelMain.add(planoDeSaudePanel);
         planoDeSaudePanel.setVisible(false);
-
+        
+        //cria a tela pacientes
+        pacientePanel = new PacientePanel();
+        pacientePanel.setBounds(POS_X, POS_Y, LARGURA, ALTURA);
+        panelMain.add(pacientePanel);
+        pacientePanel.setVisible(false);
     }
 
 }
