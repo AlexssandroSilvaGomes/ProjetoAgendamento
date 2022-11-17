@@ -3,6 +3,7 @@ package br.senai.sp.jandira.dao;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,8 +20,10 @@ import jdk.dynalink.StandardOperation;
 public class PlanoDeSaudeDAO {
     
     private final static String URL = "C:\\Users\\22282169\\java\\PlanoDeSaude.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282169\\java\\PlanoDeSaude-temp.txt";
     
     private final static Path PATH = Paths.get(URL);
+    private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
     private static ArrayList<PlanoDeSaude> planosDeSaude = new ArrayList<>();
 
@@ -59,11 +62,48 @@ public class PlanoDeSaudeDAO {
 
     public static void excluir(Integer codigo) {
         for (PlanoDeSaude p : planosDeSaude) {
-            if (codigo == p.getCodigo()) {
+            if (p.getCodigo().equals(codigo)) {
                 planosDeSaude.remove(p);
                 break;
             }
         }
+        
+        atualizarArquivo();
+        
+    }
+    
+    private static void atualizarArquivo() {
+        //PASSO 01 - Criar uma representação dos arquivos que serão manipulados
+        File arquivoAtual = new File(URL);
+        File arquivoTemp = new File(URL_TEMP);
+    
+        try {
+            //criar o arquivo temporario
+            arquivoTemp.createNewFile();
+            
+            //Abrir arquivo temporario para escrita
+            BufferedWriter bwTemp = Files.newBufferedWriter(
+                    PATH_TEMP, 
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+            
+            //Iterar na lista para adicionar as especialidades no arquivo temporario
+            //exceto o registro que não queremos mais
+            for (PlanoDeSaude p : planosDeSaude) {
+                bwTemp.write(p.getPlanoDeSaudeSeparadaPorPontoEVirgula());
+                bwTemp.newLine();
+            }
+            
+            bwTemp.close();
+            
+            //Excluir arquivo atual
+            arquivoAtual.delete();
+            //Renomear arquivo temp
+            arquivoTemp.renameTo(arquivoAtual);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
     }
 
     public static void atualizar(PlanoDeSaude correta) {
@@ -74,6 +114,9 @@ public class PlanoDeSaudeDAO {
                 break;
             }
         }
+        
+        atualizarArquivo();
+        
     }
 
     //criar lista inicial de planos de saude
