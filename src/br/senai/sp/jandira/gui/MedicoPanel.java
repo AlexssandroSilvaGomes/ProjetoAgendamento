@@ -1,11 +1,25 @@
 package br.senai.sp.jandira.gui;
 
+import br.senai.sp.jandira.dao.MedicoDAO;
+import br.senai.sp.jandira.model.Medico;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 public class MedicoPanel extends javax.swing.JPanel {
+    
+    private int linha;
 
     public MedicoPanel() {
         initComponents();
+        MedicoDAO.criarListaDeMedicos();
+        preencherTabela();
     }
-
+    
+    private int getLinha() {
+        linha = tableMedicos.getSelectedRow();
+        return linha;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,9 +87,13 @@ public class MedicoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonMedicosExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMedicosExcluirActionPerformed
-
+        
+        
+        
     }//GEN-LAST:event_ButtonMedicosExcluirActionPerformed
-
+    
+    
+    
     private void ButtonMedicosEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMedicosEditarActionPerformed
 
     }//GEN-LAST:event_ButtonMedicosEditarActionPerformed
@@ -92,4 +110,28 @@ public class MedicoPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane ScrollMedicos;
     private javax.swing.JTable tableMedicos;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherTabela() {
+        
+        tableMedicos.setModel(MedicoDAO.getMedicosModel());
+        ajustarTabela();
+        
+    }
+    
+    private void ajustarTabela() {
+        
+        //impedir que o usuario movimene as colunas
+        tableMedicos.getTableHeader().setReorderingAllowed(false);
+        
+        //Bloquear a edição das celulas
+        tableMedicos.setDefaultEditor(Object.class, null);
+        
+        //Definir a largura das colunas
+        tableMedicos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tableMedicos.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tableMedicos.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tableMedicos.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tableMedicos.getColumnModel().getColumn(3).setPreferredWidth(317);
+    }
+    
 }
