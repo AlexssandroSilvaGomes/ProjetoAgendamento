@@ -3,6 +3,7 @@ package br.senai.sp.jandira.gui;
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.OperacaoEnum;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 

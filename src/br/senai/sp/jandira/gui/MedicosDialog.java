@@ -1,10 +1,12 @@
 package br.senai.sp.jandira.gui;
 
+import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import br.senai.sp.jandira.dao.MedicoDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 public class MedicosDialog extends javax.swing.JDialog {
@@ -379,4 +381,8 @@ public class MedicosDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textFieldNomeMedico;
     private javax.swing.JTextField textFieldTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void jList1(Object[] toArray) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
