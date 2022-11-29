@@ -293,7 +293,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textFieldNomeCategoriaActionPerformed
 
     private void textFieldValidadePlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldValidadePlanoActionPerformed
-
+ 
     }//GEN-LAST:event_textFieldValidadePlanoActionPerformed
 
 

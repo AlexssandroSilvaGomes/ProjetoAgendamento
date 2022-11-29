@@ -101,6 +101,17 @@ public class MedicoDAO {
             erro.printStackTrace();
         }
         
+    }
+    
+    public static void atualizar(Medico correta) {
+        for (Medico m : medicos) {
+            if (m.getCodigo().equals(correta.getCodigo())) {
+                int posicao = medicos.indexOf(m);
+                medicos.set(posicao, correta);
+                break;
+            }
+        }
+        
         atualizarArquivo();
         
     }

@@ -2,6 +2,7 @@ package br.senai.sp.jandira.gui;
 
 import br.senai.sp.jandira.dao.MedicoDAO;
 import br.senai.sp.jandira.model.Medico;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -88,18 +89,64 @@ public class MedicoPanel extends javax.swing.JPanel {
 
     private void ButtonMedicosExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMedicosExcluirActionPerformed
         
-        
+        if (getLinha() != -1) {
+            excluirMedico();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione o médico que você deseja excluir!",
+                    "atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
         
     }//GEN-LAST:event_ButtonMedicosExcluirActionPerformed
     
+    private void editarMedico() {
+        Medico medico = MedicoDAO.getMedicos(getCodigo());
+        
+        MedicosDialog medicoDialog = new MedicosDialog(null, true, medico, OperacaoEnum.EDITAR);
+        
+        medicoDialog.setVisible(true);
+        
+        preencherTabela();
+        
+    }
     
+    private void excluirMedico() {
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Você confirma a exclusão?",
+                "Confirmação de exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if (resposta == 0) {
+            MedicoDAO.excluir(getCodigo());
+            preencherTabela();
+        }
+    }
+    
+    private Integer getCodigo() {
+        String codigoStr = tableMedicos.getValueAt(getLinha(), 0).toString();
+        Integer codigo = Integer.valueOf(codigoStr);
+        return codigo;
+    }
     
     private void ButtonMedicosEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMedicosEditarActionPerformed
-
+        
+        if (getLinha() != -1) {
+            editarMedico();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione o médico que deseja editar!",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_ButtonMedicosEditarActionPerformed
 
     private void ButtonMedicosAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMedicosAdicionarActionPerformed
-
+        MedicosDialog medicosDialog = new MedicosDialog(null, true, OperacaoEnum.ADICIONAR);
+        medicosDialog.setVisible(true);
+        preencherTabela();
     }//GEN-LAST:event_ButtonMedicosAdicionarActionPerformed
 
 
