@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.dao;
 
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.Medico;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -116,6 +118,21 @@ public class MedicoDAO {
         
     }
     
+    public static ArrayList<Especialidade> separarEspecialidades (String linha) {
+        String[] vetor = linha.split(";");
+        int codigoEsp = 6;
+        
+        ArrayList<Especialidade> especialidades = new ArrayList<>();
+        
+        while (vetor.length > codigoEsp) {
+            especialidades.add(EspecialidadeDAO.getEspecialidades(Integer.valueOf(vetor[codigoEsp])));
+            codigoEsp++;
+        }
+        
+        return especialidades;
+        
+    }
+    
     //Criar lista inicial de medicos
     public static void criarListaDeMedicos() {
         
@@ -132,7 +149,8 @@ public class MedicoDAO {
                         vetor[2],
                         vetor[3],
                         vetor[4],
-                        LocalDate.parse(vetor[5]));
+                        LocalDate.parse(vetor[5]),
+                        separarEspecialidades(linha));
                 
                 //Guardar o medico na lista
                 medicos.add(m);
@@ -147,6 +165,29 @@ public class MedicoDAO {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao ler o arquivo!");
         }
     }
+    
+    public static DefaultListModel<Especialidade> getEspecialidedesModel() {
+        DefaultListModel<Especialidade> listaEspecialidades = new DefaultListModel<>();
+    
+        try {
+            BufferedReader leitor = Files.newBufferedReader(PATH);
+            
+            String linha = leitor.readLine();
+            
+            for (Especialidade e : separarEspecialidades(linha)) {
+                listaEspecialidades.addElement(e);
+            }
+            
+            leitor.close();
+            
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro durante a leitura do arquivo!");
+        }
+        
+        return listaEspecialidades;
+    
+    }
+    
     
     public static DefaultTableModel getMedicosModel() {
         String[] titulos = {"CÓDIGO", "CRM", "NOME", "TELEFONE"};

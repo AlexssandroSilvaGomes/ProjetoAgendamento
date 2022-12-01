@@ -80,6 +80,10 @@ public class Especialidade {
         return descricao;
     }
     
+    public String toString() {
+        return this.nome;
+    }
+    
     public String getEspecialidadeSeparadaPorPontoEVirgula() {
         return this.codigo + ";" + this.nome + ";" + this.descricao;
     }

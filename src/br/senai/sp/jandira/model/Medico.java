@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Medico {
 
@@ -9,7 +10,7 @@ public class Medico {
     private String email;
     private String crm;
     private LocalDate dataDeNascimento;
-    private Especialidade[] especialidade;
+    private ArrayList<Especialidade> especialidade;
     private Integer codigo;
     private static int contador = 99;
 
@@ -39,7 +40,8 @@ public class Medico {
             String nome,
             String telefone,
             String email,
-            LocalDate dataDeNascimento) {
+            LocalDate dataDeNascimento,
+            ArrayList<Especialidade> especialidade) {
         this.crm = crm;
         this.nome = nome;
         this.telefone = telefone;
@@ -47,6 +49,7 @@ public class Medico {
         this.dataDeNascimento = dataDeNascimento;
         this.codigo = codigo;
         this.contador = codigo;
+        this.especialidade = especialidade;
 
     }
 
@@ -108,15 +111,30 @@ public class Medico {
         this.crm = crm;
     }
 
-    public Especialidade[] getEspecialidade() {
+    public ArrayList<Especialidade> getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(Especialidade[] especialidade) {
+    public void setEspecialidade(ArrayList<Especialidade> especialidade) {
         this.especialidade = especialidade;
+    }
+    
+    public String listaToString(ArrayList<Especialidade> lista) {
+        ArrayList<String> codigosEspecialidade = new ArrayList<>();
+        for (Especialidade e : lista) {
+            codigosEspecialidade.add(e.getCodigo().toString());
+        }
+        
+        return String.join(";", codigosEspecialidade);
     }
 
     public String getMedicoSeparadoPorPontoEVirgula() {
-        return this.codigo + ";" + this.crm + ";" + this.nome + ";" + this.telefone + ";" + this.email + ";" + this.dataDeNascimento;
+        return this.codigo + ";" 
+                + this.crm + ";" 
+                + this.nome + ";" 
+                + this.telefone + ";" 
+                + this.email + ";" 
+                + this.dataDeNascimento + ";"
+                + listaToString(this.especialidade);
     }
 }
